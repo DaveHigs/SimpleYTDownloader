@@ -1,18 +1,18 @@
 [tool.poetry]
-name = "YTDownloader"
+name = "simpleytdownloader"
 version = "0.1.0"
 description = ""
 authors = ["David <david.higuera1@hotmail.com>"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 pytube = "^15.0.0"
-customtkinter = "^5.2.0"
-
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
+customtkinter = "^5.2.1"
+tk = "^0.1.0"
+packaging = "^23.2"
+pyqt5-qt5 = { version = "5.15.2", extras = ["qt"] }
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
