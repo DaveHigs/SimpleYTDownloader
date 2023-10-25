@@ -6,25 +6,38 @@ from pytube import YouTube
 # Function to download as mp4
 def download_video():
     video_url = url_entry.get()
-    if formatmenu.get() == 'MP4':
-        try:
-            yt = YouTube(video_url)
-            stream = yt.streams.get_highest_resolution()
-            # download_path = os.path.expanduser('~')  # Change this to your desired download path
-            download_path = os.getcwd() # Uses CWD
-            stream.download(output_path=download_path)
-            status_label.configure(text='Download successful!')
-        except:
-            status_label.configure(text='Error: Incorrect URL')
+    format_choice = formatmenu.get()
+
+    if format_choice == 'MP4':
+        result = download_mp4(video_url)
     else:
-        try:
-            yt = YouTube(video_url)
-            stream = yt.streams.filter(only_audio=True, subtype='webm').first()
-            download_path = os.getcwd() # Uses CWD
-            stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
-            status_label.configure(text='Download successful!')
-        except:
-            status_label.configure(text='Error: Incorrect URL')
+        result = download_mp3(video_url)
+
+    if result is True:
+        status_label.configure(text='Download successful!')
+    else:
+        status_label.configure(text='Error: Incorrect URL')
+
+def download_mp4(video_url):
+    try:
+        yt = YouTube(video_url)
+        stream = yt.streams.get_highest_resolution()
+        # download_path = os.path.expanduser('~')  # Change this to your desired download path
+        download_path = os.getcwd() # Uses CWD
+        stream.download(output_path=download_path)
+        return True
+    except:
+        return False
+        
+def download_mp3(video_url):
+    try:
+        yt = YouTube(video_url)
+        stream = yt.streams.filter(only_audio=True, subtype='webm').first()
+        download_path = os.getcwd() # Uses CWD
+        stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
+        return True
+    except:
+        return False    
 
 # Create the main window
 tk.set_appearance_mode('system')
