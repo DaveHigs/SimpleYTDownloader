@@ -3,8 +3,17 @@ import sys
 import customtkinter as tk
 from pytube import YouTube
 
+# This variable will serve to check if a status window exists
+status_window = None
+
 # Function to download as mp4
 def download_video():
+    global status_window
+
+    # Check if status_window is already open, if so, close it
+    if status_window:
+        status_window.destroy()
+
     video_url = url_entry.get()
     format_choice = formatmenu.get()
 
@@ -14,9 +23,9 @@ def download_video():
         result = download_mp3(video_url)
 
     if result is True:
-        status_label.configure(text='Download successful!')
+        show_status_message('Download successful!')
     else:
-        status_label.configure(text='Error: Incorrect URL')
+        show_status_message('Error: Incorrect URL')
 
 def download_mp4(video_url):
     try:
@@ -37,13 +46,26 @@ def download_mp3(video_url):
         stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
         return True
     except:
-        return False    
+        return False
+    
+def show_status_message(message):
+    global status_window
+
+    status_window = tk.CTkToplevel()
+    status_window.geometry('300x150')
+    status_window.title('Status')
+
+    status_label = tk.CTkLabel(status_window, text=message, font=('Roboto', 18))
+    status_label.pack(pady=20, padx=20)
+
+    close_button = tk.CTkButton(status_window, text='Close', command=status_window.destroy)
+    close_button.pack(pady=10, padx=10)
 
 # Create the main window
 tk.set_appearance_mode('system')
 
 root = tk.CTk()
-root.geometry('500x500')
+root.geometry('500x300')
 root.title('YouTube Downloader')
 root.minsize(350, 350)
 
@@ -52,7 +74,7 @@ frame = tk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill='both', expand=True, side='bottom')
 
 # Title
-label = tk.CTkLabel(master=frame, text='Simple Youtube Downloader', font=('Roboto', 24))
+label = tk.CTkLabel(master=frame, text='Simple YouTube Downloader', font=('Roboto', 24))
 label.pack(pady=12, padx=10)
 
 # Youtube URL
@@ -71,11 +93,7 @@ formatmenu.pack(padx=10)
 
 # Download Button
 download_button = tk.CTkButton(frame, text='Download', command=download_video)
-download_button.pack(pady=10, padx=10)
-
-# Create a status label
-status_label = tk.CTkLabel(frame, text='')
-status_label.pack()
+download_button.pack(pady=30, padx=10)
 
 # Start the GUI main loop
 root.mainloop()
