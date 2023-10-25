@@ -8,6 +8,28 @@ from pytube.exceptions import VideoUnavailable, RegexMatchError, PytubeError
 status_window = None
 
 def download_video():
+    '''
+    Download a video from a given URL.
+
+    This function downloads a video from the URL provided by the user. 
+    It supports downloading videos in both MP4 and MP3. If the selected format
+    is MP4, the function attempts to download the video in the highest available
+    resolution. For MP3, it downloads the audio content in the WebM format and
+    saves it as an MP3 file with the same title as the video.
+
+    Args:
+        None (The function retrieves input from global variables, url_entry, and formatmenu).
+
+    Returns:
+        None
+
+    Note:
+        - The downloaded video is saved in the current working directory.
+        - In case of a successful download, the status message is updated to 
+          'Download successful!' for a few seconds and then automatically cleared.
+        - If the provided URL is incorrect or the download encounters an error,
+          the status message will display the proper error.
+    '''
     global status_window
 
     # Check if status_window is already open, if so, close it
@@ -28,6 +50,25 @@ def download_video():
         show_status_message(f'Error: {result}')
 
 def download_mp4(video_url):
+    '''
+    Download a video in MP4 format.
+
+    This function takes a video URL and attempts to download the video in MP4
+    format.
+
+    Args:
+        video_url (str): The URL of the video to be downloaded.
+
+    Returns:
+        str or bool: If the download is successful, it returns True. If an error
+        occurs, it returns a string containing an informative error message.
+
+    Raises:
+        - VideoUnavailable: If the video is unavailable or has been deleted.
+        - RegexMatchError: If the video URL format is not supported.
+        - PytubeError: If a PyTube-specific error occurs.
+        - Exception: If an unexpected error occurs during the download.
+    '''
     try:
         yt = YouTube(video_url)
         stream = yt.streams.get_highest_resolution()
@@ -35,6 +76,7 @@ def download_mp4(video_url):
         download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path)
         return True
+    
     except VideoUnavailable:
         return "Video is unavailable or deleted."
     except RegexMatchError:
@@ -46,12 +88,32 @@ def download_mp4(video_url):
 
         
 def download_mp3(video_url):
+    '''
+    Download a video in MP3 format.
+
+    This function takes a video URL and attempts to download the audio in MP3
+    format.
+
+    Args:
+        video_url (str): The URL of the video from where the audio is to be downloaded.
+
+    Returns:
+        str or bool: If the download is successful, it returns True. If an error
+        occurs, it returns a string containing an informative error message.
+
+    Raises:
+        - VideoUnavailable: If the video is unavailable or has been deleted.
+        - RegexMatchError: If the video URL format is not supported.
+        - PytubeError: If a PyTube-specific error occurs.
+        - Exception: If an unexpected error occurs during the download.
+    '''
     try:
         yt = YouTube(video_url)
         stream = yt.streams.filter(only_audio=True, subtype='webm').first()
         download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
         return True
+    
     except VideoUnavailable:
         return "Video is unavailable or deleted."
     except RegexMatchError:
@@ -63,6 +125,18 @@ def download_mp3(video_url):
 
     
 def show_status_message(message):
+    '''
+    Displays a status message in a separate Toplevel window.
+
+    This function takes a message to be displayed after the execution of the
+    proper download function.
+
+    Args:
+        message (str): The message to be displayed in the window.
+
+    Returns:
+        None.
+    '''
     global status_window
 
     status_window = tk.CTkToplevel()
