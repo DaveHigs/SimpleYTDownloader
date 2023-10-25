@@ -15,9 +15,16 @@ def download_video():
             stream.download(output_path=download_path)
             status_label.configure(text="Download successful!")
         except Exception as e:
-            status_label.configure(text="Error: " + str(e))
+            status_label.configure(text=f"Error: {str(e)}")
     else:
-        pass
+        try:
+            yt = YouTube(video_url)
+            stream = yt.streams.filter(only_audio=True, subtype='webm').first()
+            download_path = os.getcwd() # Uses CWD
+            stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
+            status_label.configure(text="Download successful!")
+        except Exception as e:
+            status_label.configure(text=f"Error: {str(e)}")
 
 # Create the main window
 root = tk.CTk()
