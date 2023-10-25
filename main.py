@@ -2,11 +2,11 @@ import os
 import sys
 import customtkinter as tk
 from pytube import YouTube
+from pytube.exceptions import VideoUnavailable, RegexMatchError, PytubeError
 
 # This variable will serve to check if a status window exists
 status_window = None
 
-# Function to download as mp4
 def download_video():
     global status_window
 
@@ -25,7 +25,7 @@ def download_video():
     if result is True:
         show_status_message('Download successful!')
     else:
-        show_status_message('Error: Incorrect URL')
+        show_status_message(f'Error: {result}')
 
 def download_mp4(video_url):
     try:
@@ -35,8 +35,15 @@ def download_mp4(video_url):
         download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path)
         return True
-    except:
-        return False
+    except VideoUnavailable:
+        return "Video is unavailable or deleted."
+    except RegexMatchError:
+        return "Video URL format is not supported."
+    except PytubeError as e:
+        return f"PyTube error: {str(e)}"
+    except Exception as e:
+        return f"An unexpected error occurred: {str(e)}"
+
         
 def download_mp3(video_url):
     try:
@@ -45,14 +52,21 @@ def download_mp3(video_url):
         download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
         return True
-    except:
-        return False
+    except VideoUnavailable:
+        return "Video is unavailable or deleted."
+    except RegexMatchError:
+        return "Video URL format is not supported."
+    except PytubeError as e:
+        return f"PyTube error: {str(e)}"
+    except Exception as e:
+        return f"An unexpected error occurred: {str(e)}"
+
     
 def show_status_message(message):
     global status_window
 
     status_window = tk.CTkToplevel()
-    status_window.geometry('300x150')
+    status_window.geometry('400x150')
     status_window.title('Status')
 
     status_label = tk.CTkLabel(status_window, text=message, font=('Roboto', 18))
