@@ -38,6 +38,10 @@ root.minsize(350, 350)
 frame = tk.CTkFrame(master=root)
 frame.pack(pady=20, padx=20, fill='both', expand=True, side='bottom')
 
+# Title
+label = tk.CTkLabel(master=frame, text='Simple Youtube Downloader', font=('Roboto', 24))
+label.pack(pady=12, padx=10)
+
 # Youtube URL
 url_label = tk.CTkLabel(frame, text='Enter YouTube URL:')
 url_label.pack()
