@@ -12,6 +12,7 @@ customtkinter = "^5.2.1"
 tk = "^0.1.0"
 packaging = "^23.2"
 pyqt5-qt5 = { version = "5.15.2", extras = ["qt"] }
+pygobject = "^3.46.0"
 
 [build-system]
 requires = ["poetry-core"]
