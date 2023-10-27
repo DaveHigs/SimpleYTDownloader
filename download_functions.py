@@ -2,7 +2,7 @@ import os
 from pytube import YouTube
 from pytube.exceptions import VideoUnavailable, RegexMatchError, PytubeError
 
-def download_mp4(video_url):
+def download_mp4(video_url, download_path):
     '''
     Download a video in MP4 format.
 
@@ -25,8 +25,6 @@ def download_mp4(video_url):
     try:
         yt = YouTube(video_url)
         stream = yt.streams.get_highest_resolution()
-        # download_path = os.path.expanduser('~')  # Change this to your desired download path
-        download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path)
         return True
     
@@ -40,7 +38,7 @@ def download_mp4(video_url):
         return f"An unexpected error occurred: {str(e)}"
 
         
-def download_mp3(video_url):
+def download_mp3(video_url, download_path):
     '''
     Download a video in MP3 format.
 
@@ -63,7 +61,6 @@ def download_mp3(video_url):
     try:
         yt = YouTube(video_url)
         stream = yt.streams.filter(only_audio=True, subtype='webm').first()
-        download_path = os.getcwd() # Uses CWD
         stream.download(output_path=download_path, filename=f'{yt.title}.mp3')
         return True
     
