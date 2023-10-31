@@ -1,5 +1,7 @@
 # Simple YouTube Downloader
 
+[![License](https://img.shields.io/github/license/DaveHigs/SimpleYTDownloader)](LICENSE)
+
 This tool provides a user-friendly a graphical user interface (GUI) that allows you to download YouTube videos in either MP4 or MP3 format.
 
 ![GUI Screenshot](image.png)
