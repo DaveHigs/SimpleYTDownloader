@@ -25,9 +25,9 @@ If you want to build the application from the source code, follow these steps:
 
 1. Clone this repository:
 
-   ```sh
-   git clone https://github.com/DaveHigs/SimpleYTDownloader
-   ```
+```sh
+git clone https://github.com/DaveHigs/SimpleYTDownloader
+```
 
 2. Navigate to the project directory:
 
