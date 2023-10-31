@@ -1,7 +1,7 @@
 import os
 import webview
 
-def webview_folder_dialog():
+def webview_file_dialog(filename, format):
     '''
     Creates a dialog window that allows the user to pick a folder path.
 
@@ -16,16 +16,22 @@ def webview_folder_dialog():
         TypeError: If user exits the folder dialog without picking a location.
     '''
     file = None
-    def choose_folder_dialog(w):
+    def save_file_dialog(w):
         nonlocal file
+        nonlocal filename
+        nonlocal format
+
+        filename += format
+
         try:
             default_dir = os.path.expanduser("~/Downloads")
-            file = w.create_file_dialog(webview.FOLDER_DIALOG, directory=default_dir)[0]
+            file = w.create_file_dialog(webview.SAVE_DIALOG, directory=default_dir,
+                                        save_filename=filename)[0]
         except TypeError:
             pass
         finally:
             w.destroy()
     window = webview.create_window('', hidden=True)
-    webview.start(choose_folder_dialog, window)
+    webview.start(save_file_dialog, window)
 
     return file

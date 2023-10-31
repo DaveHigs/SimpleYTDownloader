@@ -1,6 +1,5 @@
 import customtkinter as tk
 from download_functions import download_mp4, download_mp3
-from folder_chooser import webview_folder_dialog
 
 # Variable used to check if a status window exists
 status_window = None
@@ -33,15 +32,13 @@ def download_video():
     if status_window:
         status_window.destroy()
     
-    download_path = webview_folder_dialog()
-
     video_url = url_entry.get()
     format_choice = formatmenu.get()
     
     if format_choice == 'MP4':
-        result = download_mp4(video_url, download_path)
+        result = download_mp4(video_url)
     else:
-        result = download_mp3(video_url, download_path)
+        result = download_mp3(video_url)
 
     if result is True:
         show_status_message('Download successful!')
