@@ -35,18 +35,25 @@ git clone https://github.com/DaveHigs/SimpleYTDownloader
 cd SimpleYTDownloader
 ```
 
-3. Install the dependencies:
+3. Create virtual environment:
 
 ```sh
-poetry install
+python -m venv .venv
 ```
 
-4. Run the application:
+4. Activate environment and install dependencies:
 
 ```sh
-poetry run python main.py
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
+5. Run application:
+
+```sh
+cd simpleytdownloader
+python main.py
+```
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
