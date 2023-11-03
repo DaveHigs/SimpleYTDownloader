@@ -26,7 +26,7 @@ def webview_file_dialog(filename, format):
         try:
             default_dir = os.path.expanduser("~/Downloads")
             file = w.create_file_dialog(webview.SAVE_DIALOG, directory=default_dir,
-                                        save_filename=filename)[0]
+                                        save_filename=filename)
         except TypeError:
             pass
         finally:
