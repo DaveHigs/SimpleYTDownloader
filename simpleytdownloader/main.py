@@ -31,10 +31,10 @@ def download_video():
     # Check if status_window is already open, if so, close it
     if status_window:
         status_window.destroy()
-    
+
     video_url = url_entry.get()
     format_choice = formatmenu.get()
-    
+
     if format_choice == 'MP4':
         result = download_mp4(video_url)
     else:
@@ -74,9 +74,9 @@ def show_status_message(message):
 tk.set_appearance_mode('system')
 
 root = tk.CTk()
-root.geometry('500x300')
+root.geometry('500x400')
 root.title('YouTube Downloader')
-root.minsize(350, 350)
+root.minsize(400, 400)
 
 # Create the main frame
 frame = tk.CTkFrame(master=root)
