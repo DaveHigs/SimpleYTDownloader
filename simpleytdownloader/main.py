@@ -1,4 +1,5 @@
 import customtkinter as tk
+from PIL import ImageTk
 from download_functions import download_mp4, download_mp3
 
 # Variable used to check if a status window exists
@@ -75,8 +76,12 @@ tk.set_appearance_mode('system')
 
 root = tk.CTk()
 root.geometry('500x400')
-root.title('YouTube Downloader')
+root.title('Simple YouTube Downloader')
 root.minsize(400, 400)
+
+iconpath = ImageTk.PhotoImage(file='.\icon.png')
+root.wm_iconbitmap()
+root.iconphoto(True, iconpath)
 
 # Create the main frame
 frame = tk.CTkFrame(master=root)
