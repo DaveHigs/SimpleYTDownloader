@@ -34,13 +34,13 @@ def download_mp4(video_url):
         return True
     
     except VideoUnavailable:
-        return "Video is unavailable or deleted."
+        return 'Video is unavailable or deleted.'
     except RegexMatchError:
-        return "Video URL format is not supported."
+        return 'Video URL format is not supported.'
     except PytubeError as e:
-        return f"PyTube error: {str(e)}"
+        return f'PyTube error: {str(e)}'
     except Exception as e:
-        return f"An unexpected error occurred: {str(e)}"
+        return f'An unexpected error occurred: {str(e)}'
 
         
 def download_mp3(video_url):
@@ -74,10 +74,10 @@ def download_mp3(video_url):
         return True
     
     except VideoUnavailable:
-        return "Video is unavailable or deleted."
+        return 'Video is unavailable or deleted.'
     except RegexMatchError:
-        return "Video URL format is not supported."
+        return 'Video URL format is not supported.'
     except PytubeError as e:
-        return f"PyTube error: {str(e)}"
+        return f'PyTube error: {str(e)}'
     except Exception as e:
-        return f"An unexpected error occurred: {str(e)}"
+        return f'An unexpected error occurred: {str(e)}'
