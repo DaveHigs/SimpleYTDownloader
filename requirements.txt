@@ -1,9 +1,14 @@
 bottle==0.12.25
+cffi==1.16.0
+clr-loader==0.2.6
 customtkinter==5.2.1
 darkdetect==0.8.0
 packaging==23.2
+Pillow==10.1.0
 proxy-tools==0.1.0
+pycparser==2.21
 PyQt5-Qt5==5.15.2
+pythonnet==3.0.3
 pytube==15.0.0
 pywebview==4.4.1
 tk==0.1.0
