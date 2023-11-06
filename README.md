@@ -32,7 +32,7 @@ git clone https://github.com/DaveHigs/SimpleYTDownloader
 2. Navigate to the project directory:
 
 ```sh
-cd SimpleYTDownloader
+cd .\SimpleYTDownloader
 ```
 
 3. Create virtual environment:
@@ -44,7 +44,7 @@ python -m venv .venv
 4. Activate environment and install dependencies:
 
 ```sh
-source .venv/bin/activate
+. .\.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
