@@ -3,8 +3,6 @@ customtkinter==5.2.1
 darkdetect==0.8.0
 packaging==23.2
 proxy-tools==0.1.0
-pycairo==1.25.1
-PyGObject==3.46.0
 PyQt5-Qt5==5.15.2
 pytube==15.0.0
 pywebview==4.4.1
