@@ -9,12 +9,12 @@ def download_video():
     '''
     Download a video from a given URL.
 
-    This function downloads a video from the URL provided by the user. 
+    This function downloads a video from the URL provided by the user.
     It supports downloading videos in both MP4 and MP3, and it will call the
     appropriate function depending on the format chosen by the user.
 
     Args:
-        None (The function retrieves input from global variables, url_entry, 
+        None (The function retrieves input from global variables, url_entry,
         and formatmenu).
 
     Returns:
@@ -22,7 +22,7 @@ def download_video():
 
     Note:
         - The function will create a dialog window to choose folder download path.
-        - In case of a successful download, the status message is updated to 
+        - In case of a successful download, the status message is updated to
           'Download successful!' for a few seconds and then automatically cleared.
         - If the provided URL is incorrect or the download encounters an error,
           the status message will display the proper error.

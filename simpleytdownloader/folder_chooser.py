@@ -7,7 +7,7 @@ def webview_file_dialog(filename, format):
 
     Args:
         None
-    
+
     Returns:
         file (str) or None: A string with the choosen folder path, or None if 
         the user closes the window.

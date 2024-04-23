@@ -25,14 +25,14 @@ def download_mp4(video_url):
     '''
     try:
         yt = YouTube(video_url)
-        
+
         path = webview_file_dialog(yt.title, '.mp4')
         download_path, filename = os.path.split(path)
 
         stream = yt.streams.get_highest_resolution()
         stream.download(output_path=download_path, filename=filename)
         return True
-    
+
     except VideoUnavailable:
         return 'Video is unavailable or deleted.'
     except RegexMatchError:
@@ -42,7 +42,7 @@ def download_mp4(video_url):
     except Exception as e:
         return f'An unexpected error occurred: {str(e)}'
 
-        
+
 def download_mp3(video_url):
     '''
     Download a video in MP3 format.
@@ -72,7 +72,7 @@ def download_mp3(video_url):
         stream = yt.streams.filter(only_audio=True, subtype='webm').first()
         stream.download(output_path=download_path, filename=filename)
         return True
-    
+
     except VideoUnavailable:
         return 'Video is unavailable or deleted.'
     except RegexMatchError:
